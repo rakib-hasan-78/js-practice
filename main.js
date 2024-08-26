@@ -48,3 +48,46 @@ console.log(Math.pow(2,3))
 const date = new Date();
 console.log(date.getTime(),  date.getMilliseconds())
 
+
+
+// js conditions 
+
+let x1 = 41;
+let mod = 13;
+
+if (!(x1%mod===2)) {
+    console.log('no bhaghsesh is 2')
+} else {
+  console.log('got a number !!!')
+}
+
+if (!(mod>x1)) {
+    console.log('prime number is ' + x1 )
+} else {
+  console.log('invalid number mod' + '(' + mod + ') + is larger number')
+}
+
+mod%2===0 ? console.log('${mod} is an even number'): console.log(`${mod} is an odd number`);
+
+let wx = 0
+switch (true) {
+  case (wx<0):
+  console.log(`${wx} is an invalid number`)
+  break;
+  case (wx===0):
+  console.log(`${wx} is not a number`)
+  break;
+  case (wx%1!==0):
+  console.log(`${wx} is  a  float number`)
+  break;
+  case (wx%2===0):
+  console.log(`${wx} is  an even number`)
+  break;
+  case (wx%2===1):
+  console.log(`${wx} is  an odd number`)
+  break;
+
+  default:
+  console.log(`invalid number`)
+  break;
+}

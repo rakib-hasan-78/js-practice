@@ -91,3 +91,53 @@ switch (true) {
   console.log(`invalid number`)
   break;
 }
+
+const d = new Date();
+const day = d.getDay();
+switch (day) {
+  case 0:
+  console.log(`Today is Sunday`)
+  break;
+  case 1:
+  console.log(`Today is Monday`)
+  break;
+  case 2:
+  console.log(`Today is Tuesday`)
+  break;
+  case 3:
+  console.log(`Today is Wednesday`)
+  break;
+  case 4:
+  console.log(`Today is Thursday`)
+  break;
+  case 5:
+  console.log(`Today is Friday`)
+  break;
+  case 6:
+  console.log(`Today is Saturday`)
+  break;
+
+  default:
+  console.log(`invalid day`)
+  break;
+}
+
+
+//  it first converts its argument to a number using the Number() function
+let  sum = 0;
+let total = 0;
+for(let i =0; i<=20;i++){
+  if (i%2===0) {
+    console.log(sum + '+'+i +'='+(sum+i))
+    sum+=i;
+  }
+}
+console.log('Total sum = '+sum);
+
+for (let i = 0; i <=20; i++) {
+  if (i%2===1) {
+    console.log(total + '+'+i+'='+ (total+i))
+    total+=i
+  }
+}
+console.log('Total Odd Number Sumasion ='+total);

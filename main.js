@@ -124,6 +124,7 @@ switch (day) {
 
 
 //  it first converts its argument to a number using the Number() function
+
 let  sum = 0;
 let total = 0;
 for(let i =0; i<=20;i++){
@@ -136,8 +137,61 @@ console.log('Total sum = '+sum);
 
 for (let i = 0; i <=20; i++) {
   if (i%2===1) {
-    console.log(total + '+'+i+'='+ (total+i))
-    total+=i
+    console.log(total + '+'+i+'='+ (total+i)); 
+    total+=i;
   }
 }
 console.log('Total Odd Number Sumasion ='+total);
+
+
+let isTrue = true;
+while (isTrue) {
+  let numbers = Math.round(Math.random()*10);
+  if (numbers===7) {
+    console.log('winner winner chicken dinner!')
+    break;
+  } else {
+    console.log(`you got ${numbers}`)
+  }
+}
+
+let m = 0;
+
+while (m<10) {
+  m++;
+  console.log(m)
+}
+
+// function x11() {
+//   if (m<10) {
+//     m++;
+//     console.log(m)
+//     setTimeout(x11,1000)
+//   }
+// }
+// x11()
+
+let dd = 5;
+for (let i = 1; i<=dd; i++) {
+  let em = ''
+    
+    for (let j = 1; j<=i; j++) {
+
+        em += '* '
+    }
+
+    console.log(em);
+}
+
+
+const firstName = 'rakib';
+const lastName = 'hasan';
+const myName = firstName.concat(' ', lastName);
+console.log(myName);
+const results = firstName.padEnd(firstName.length+1,' ') + lastName
+console.log(results)
+console.log(myName.substring(6,11));
+
+const p = `The government has appointed senior lawyer Ehsanul Haque Shomaji as Dhaka Metropolitan public prosecutor.`;
+const pResult = p.split(' ').map(word=>word.charAt(0).toUpperCase()+word.slice(1)).join(' ')
+console.log(pResult);

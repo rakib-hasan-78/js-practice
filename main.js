@@ -493,7 +493,7 @@ console.log(mappi)
 
 // filter method --->
 
-const filtArr = [11,2,3,1,4,5,33,5,6,7];
+const filtArr = [11,2,3,1,4,5,33,6,7];
 
 function myFilter(arr, cb) {
   const temp =[];
@@ -515,5 +515,115 @@ console.log(checkfilter)
 
 const mainFilter = filtArr.filter((value) => value>=4)
 console.log(mainFilter);
+
+
+// reduce 
+
+function myRed(arr, cb, acc) {
+  for (let i = 0; i < arr.length; i++) {
+    acc = cb(acc, arr[i])
+  }
+  return acc;
+}
+
+const checkRed = myRed(filtArr, (preValue, currValue)=>{
+  return preValue + currValue;
+}, filtArr[0])
+
+console.log(checkRed);
+
+const redMax = myRed(filtArr, function (preValue, currValue) {
+  return Math.max(preValue, currValue)
+},filtArr[0])
+
+console.log(redMax)
+
+const redMin = myRed(filtArr, (preValue, currValue)=>(Math.min(preValue, currValue)),filtArr[0])
+console.log(redMin)
+
+// find & findIndex--->
+
+function myFind (arr, cb) {
+  for (var i = 0 ; i<arr.length; i++) {
+    if (cb(arr[i])) {
+      return arr[i]
+    }
+  }
+}
+
+var findVal = myFind(filtArr, (value)=>(value===2))
+console.log(findVal)
+
+function myIndex(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    if (cb(i)) {
+      return i;
+    }
+  }
+}
+
+var findInd = myIndex(filtArr, (index)=>(index===7))
+console.log(findInd)
+
+// index to value or viseversa --->
+
+function mySearch(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    if (cb(arr[i], i)) {
+      return arr[i], i
+    }
+  }  
+}
+
+var my_search = mySearch(filtArr, (value, index)=>{
+  if (index===7) {
+    return value
+  }
+})
+
+console.log(my_search);
+
+var my_index = mySearch(filtArr, (value, index)=>{
+  if (value===7) {
+    return index;
+  }
+})
+
+console.log(my_index);
+
+const my_value = filtArr.find((value)=>value===7)
+console.log(my_value)
+
+const my_search_index = filtArr.findIndex((value, index)=>{
+  if (value===33) {
+    return index
+  }
+});
+console.log(my_search_index)
+
+// return function from another function ---->
+
+function greetings(msg) {
+  return function (name) {
+    return msg + ' '+ name
+  }
+}
+
+var night = greetings('good night,')
+console.log(night('rakib'))
+
+function base(x){
+  function power(n) {
+    let result = 1
+    for (let i = 0; i <x; i++) {
+      result*=n
+    }
+    return result;
+  }
+  return power
+}
+
+var base3 = base(3)
+console.log(base3(2))
 
 

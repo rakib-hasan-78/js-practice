@@ -302,4 +302,218 @@ console.log(reverseArray);
 
 
 const r = Array.from(reverseArray);
-console.log(r);
+console.log(r.reverse());
+
+const obj = {
+  x:10,
+  y:20
+}
+const xyzz = 'x';
+console.log(obj[xyzz])
+obj.x = 20;
+obj.z=5;
+console.log(obj);
+
+
+delete obj.x;
+
+console.log(obj)
+
+const pt = 'p';
+obj[pt] = 11;
+
+console.log(obj);
+
+for (const i in obj) {
+    console.log(`${i}:${obj[i]}`)
+}
+
+console.log(Object.values(obj));
+console.log(Object.keys(obj));
+console.log(Object.entries(obj));
+
+const pq = Object.assign({}, obj);
+console.log(pq)
+pq.t=13;
+const temp = 'l';
+pq[temp] = 12
+ pq.y=30
+
+ delete pq.z;
+
+ console.log(pq);
+
+
+console.log(JSON.stringify(pq)===JSON.stringify(obj));
+
+function person(name, email) {
+
+    return{
+      name:name,
+      email:email 
+    }
+}
+
+let p1 = person('musayeeb', 'example@xampl.com')
+console.log(p1);
+
+function add() {
+  let i = 0
+  let add =0
+  while (i<arguments.length) {
+    add += arguments[i]
+    i++;
+  }
+  return add
+}
+let cal = add(1,2,3,4)
+console.log(cal)
+
+
+function greeting(msg, name) {
+
+    function sayHi() {
+      let names = name.split(' ')[0];
+      console.log(msg, names)
+    }
+    sayHi()
+}
+
+greeting('hello', 'rakib hasan');
+
+
+let ram = `16GB`;
+
+function tech() {
+  function x() {
+    let ram = `128gb`
+    console.log(ram)
+  }
+  x()
+  ram = '100GB'
+}
+
+tech()
+console.log(ram)
+
+// first class & higher order function --->
+
+function a(a,b) {
+    return a+b;
+}
+
+function higher(a ,b, func) {
+  var c = a+b;
+  var d = a-b;
+
+  function polti() {
+    var v = func(a,b)
+    return a *b *c *d *v;
+  }
+  return polti;
+}
+var b = higher(2,4, a);
+console.log(b())
+
+
+// clouser scope understanding ---->
+
+let cv = 7
+
+function mm() {
+  console.log(cv)
+  let rr = 78;
+  return function () {
+    return rr
+  }
+}
+
+let res = mm()
+console.dir(res);
+
+// cb  understanding --->
+
+function calc(a,b, cb) {
+    let c = a+b;
+    let d = a *b ;
+
+     let  l = cb(c,d);
+     return l
+}
+
+var u = calc(1,2, (c,d)=>{
+  return c-d
+})
+console.log(u)
+
+// how forEach method works behind the scence ======>
+
+let ry= [1,2,3,2,4,5,7,8,9];
+
+function forEach(arr, cb) {
+  for (let i = 0; i < arr.length; i++) {
+    cb(arr[i], i, arr)
+  }
+}
+
+
+
+forEach(ry, (value, index, prr)=>{
+  console.log(value, index , prr)
+})
+
+
+forEach(ry, (value, index, prr)=>{
+   prr[index] = value + 5
+})
+
+console.log(ry);
+
+
+
+const mappi = [1,9,6,2];
+
+function myMap(arr, cb) {
+  let bima = []
+  for (let i = 0; i < arr.length; i++) {
+    let values = cb(arr[i], i, arr)
+    bima.push(values);
+  }
+  return bima
+}
+
+const checkValues = myMap(mappi, (value, index, dictonary)=>{
+  return value * 3  
+})
+
+console.log(checkValues);
+
+console.log(mappi)
+
+
+// filter method --->
+
+const filtArr = [11,2,3,1,4,5,33,5,6,7];
+
+function myFilter(arr, cb) {
+  const temp =[];
+
+  for(let i = 0; i<arr.length; i++){
+     if (cb(arr[i], i, arr)) {
+      temp.push(arr[i])
+     }
+  }
+  return temp
+}
+
+const checkfilter = myFilter(filtArr, (value)=>{
+    return value >= 9;
+})
+console.log(checkfilter)
+
+
+
+const mainFilter = filtArr.filter((value) => value>=4)
+console.log(mainFilter);
+
+

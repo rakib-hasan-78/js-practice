@@ -627,3 +627,45 @@ var base3 = base(3)
 console.log(base3(2))
 
 
+function tonrec(n) {
+  if(n===0) return;
+  console.log(`Tonmay... TAMMAN!!!!`);
+  tonrec(n-1)
+}
+tonrec(5)
+
+
+
+function recurLoop(n) {
+  if(n===1){
+    return 1
+  }
+  return n + recurLoop(n-1)
+}
+console.log(recurLoop(5))
+
+function recurMulti(x) {
+  if (x===1) {
+    return 1
+  }
+  return x * recurMulti(x-1)
+}
+console.log(recurMulti(5))
+
+
+const array = [1, 2, 3, 4, 5];
+function recursArr(arr) {
+  if(arr.length===0) return 0;
+  return arr[0] + recursArr(arr.slice(1));
+}
+console.log(recursArr(array))
+
+function foul (a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    }
+  }
+}
+
+console.log(foul(10)(11)(21))

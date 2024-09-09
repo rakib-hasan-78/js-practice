@@ -656,7 +656,7 @@ console.log(recurMulti(5))
 const array = [1, 2, 3, 4, 5];
 function recursArr(arr) {
   if(arr.length===0) return 0;
-  return arr[0] + recursArr(arr.slice(1));
+  return arr[0] + recursArr(arr.slice(1)); 
 }
 console.log(recursArr(array))
 
@@ -668,4 +668,38 @@ function foul (a) {
   }
 }
 
-console.log(foul(10)(11)(21))
+console.log(foul(10)(11)(21))   
+
+function endResult (imp){
+  console.log(imp)
+}
+function multiply(n) {
+  return n * 5
+}
+function adds(a,b) {
+  return a + b
+}
+endResult(multiply(adds(2,3)));
+
+function Objecth(){
+  var b = new Date()
+  var result = b.getTime()
+  console.log(result)
+}
+
+Objecth()
+
+// function declaration vs function expression 
+
+xyzzz()
+
+function xyzzz() {
+  console.log('poet')
+}
+
+
+pxw()
+
+var pxw = function () {
+  console.log('bimgo')
+}

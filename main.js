@@ -698,8 +698,38 @@ function xyzzz() {
 }
 
 
-pxw()
 
 var pxw = function () {
   console.log('bimgo')
 }
+pxw()
+
+
+function texting() {
+  var msg = `hewllo worldds`
+  return function () {
+    console.log(msg)
+  }
+}
+
+var rand = texting();
+rand()
+
+
+for (let i = 1; i <= 5; i++) {
+
+  (function (n) {
+    setTimeout(function() {
+      console.log(n)
+    }, 1000 * n)
+  })(i)
+}
+// oop starts here ----->
+
+function myX(){
+  console.log(this)
+}
+new myX()
+
+
+ 

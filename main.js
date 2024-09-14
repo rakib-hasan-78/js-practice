@@ -1,5 +1,7 @@
 import { booleans } from './js/booleans';
+import { ConsFac } from './js/constructOop';
 import { numbers } from './js/number';
+import { rectFactory } from './js/rectFactory';
 import { strings } from './js/string';
 
 import './style.css';
@@ -716,14 +718,14 @@ var rand = texting();
 rand()
 
 
-for (let i = 1; i <= 5; i++) {
+// for (let i = 1; i <= 5; i++) {
 
-  (function (n) {
-    setTimeout(function() {
-      console.log(n)
-    }, 1000 * n)
-  })(i)
-}
+//   (function (n) {
+//     setTimeout(function() {
+//       console.log(n)
+//     }, 1000 * n)
+//   })(i)
+// }
 // oop starts here ----->
 
 function myX(){
@@ -731,5 +733,147 @@ function myX(){
 }
 new myX()
 
+var oopPrimary = {
+  width:140,
+  height:20,
 
- 
+  areaProperty:function () {
+    var area = this.width + this.height;
+    console.log(area)
+    console.log(this)
+    // this.rangeProperty(); 
+  },
+  rangeProperty:function () {
+    var cal = this.width * this.height;
+    console.log(`range is ${cal}`);
+  }
+}
+oopPrimary.areaProperty()
+console.log(oopPrimary.width);
+
+var rect ={
+  width : 20,
+  height : 30,
+  print: oopPrimary.rangeProperty,
+  printArea: oopPrimary.areaProperty,
+}
+rect.print()
+rect.printArea();
+
+
+
+
+var rectOne = rectFactory(10,20,'rectOne');
+rectOne.area()
+
+var rectTwo = rectFactory(89, 76, 'Rect Two');
+rectTwo.area();
+
+
+
+
+var areal = new ConsFac(11,13, 'areal');
+areal.area()
+
+
+// creating custom new keywords--->
+
+// function myNew(constructor) {
+//   var temp = {}
+//   Object.setPrototypeOf(temp, constructor.prototype);
+//   let argsArray = Array.prototype.slice.apply(arguments);
+//   constructor.apply(temp, argsArray.slice(1));
+//   return temp;
+// }
+
+// var areal = myNew(ConsFac, 11,13, 'areal');
+// areal.area()
+
+// function myKeys(constructor) {
+//   var obj = {};
+//   Object.setPrototypeOf(obj, constructor.prototype)
+//   var arrData = Array.prototype.slice.apply(arguments);
+//   constructor.apply(obj, arrData.slice(1))
+//   return obj
+// }
+// var areal = myKeys(ConsFac, 12,14, 'areal');
+// areal.area()
+
+
+// function is an object in js --->
+
+var Ractt = new Function('width', 'height', 'targetName', `this.width = width;
+    this.height = height;
+    this.targetName = targetName;
+    this.area = function(){
+      var count = this.width * this.height;
+      console.log(\`\${this.targetName} area is \${count} SqKm.\`)
+    } `)
+
+var pigol = new Ractt(11,12,'pigol')
+pigol.area()
+
+
+var pingol = {
+  a:10,
+  b:21,
+}
+
+function zas (c,d){
+  var pont = this.a + this.b + c + d;
+  console.log(pont)
+}
+zas.apply( pingol,[10,9])
+zas.call(pingol,10,10)
+
+var pingol = {
+  a:10,
+  b:21,
+}
+
+function nextTest() {
+  return{
+    addTest: function () {
+      console.log(this.a + this.b)
+    },
+    addMulty: function () {
+      console.log(this.a*this.b)
+    },
+    addAbstract: function () {
+      console.log(this.a-this.b)
+    },
+    addDevide: function () {
+      console.log(this.a / this.b)
+    }
+  }
+}
+
+var result = nextTest();
+result.addTest = result.addTest.bind(pingol);
+result.addMulty = result.addMulty.bind(pingol);
+result.addAbstract = result.addAbstract.bind(pingol);
+result.addDevide = result.addDevide.bind(pingol);
+result.addAbstract();
+result.addTest()
+
+
+// call by value vs call by reference --->
+
+var t = 30;
+
+function xsw() {
+  t = 20
+  console.log(t)
+}
+xsw(t)
+console.log(t)
+
+var xc = {
+  s:19
+}
+
+function tcf() {
+  xc.s = 13
+}
+tcf(xc)
+console.log(xc)

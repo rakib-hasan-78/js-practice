@@ -1,5 +1,5 @@
 import { booleans } from './js/booleans';
-import { ConsFac } from './js/constructOop';
+import { ConsFac, PrivateConstructor } from './js/constructOop';
 import { numbers } from './js/number';
 import { rectFactory } from './js/rectFactory';
 import { strings } from './js/string';
@@ -877,3 +877,21 @@ function tcf() {
 }
 tcf(xc)
 console.log(xc)
+
+var givenValue = new PrivateConstructor(21,23, 'firstGivenValue');
+givenValue.resultSubstract();
+givenValue.devide();
+givenValue.multiply();
+givenValue.position={
+  x:41,
+  y:32
+}
+
+var givenValueTwo = new PrivateConstructor(12,11,'givenValueTwo');
+givenValueTwo.position = {
+  x:96,
+  y:92,
+  z:52
+}
+givenValueTwo.resultAdd();
+console.log(givenValueTwo)

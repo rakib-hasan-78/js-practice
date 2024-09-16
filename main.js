@@ -895,3 +895,28 @@ givenValueTwo.position = {
 }
 givenValueTwo.resultAdd();
 console.log(givenValueTwo)
+
+// propeerty descriptor 
+
+var demoObj = {
+  tonmay:'active earner',
+  rakib:'weak earner',
+  musayeeb:'baby'
+}
+Object.defineProperty(demoObj, 'rakib', {
+  writable:false
+})
+
+
+console.log(Object.keys(demoObj))
+
+// prototype in constructor 
+
+ConsFac.prototype.PI=-3.1416
+var myDEmoProto = new ConsFac(1,2,'ajjj');
+console.log(myDEmoProto.PI) 
+
+Array.prototype.myPoet= function () {
+  console.log(`hello world`)
+}
+

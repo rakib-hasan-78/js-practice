@@ -3,7 +3,6 @@ import { ConsFac, PrivateConstructor } from './js/constructOop';
 import { numbers } from './js/number';
 import { rectFactory } from './js/rectFactory';
 import { strings } from './js/string';
-
 import './style.css';
 
 document.querySelector('#app').innerHTML = `
@@ -920,3 +919,45 @@ Array.prototype.myPoet= function () {
   console.log(`hello world`)
 }
 
+
+var StyleFunc = function(color) {
+  this.color = color
+}
+
+var CalcFunc = function () {
+
+}
+CalcFunc.prototype= {
+
+    calcDivide : function() {
+    var calc = this.width / this.height;
+    console.log(`${this.targetName} ,  divide value is = ${calc}`)
+  },
+  calcMulti : function() {
+    var calc = this.width * this.height;
+    console.log(`${this.targetName} , Multiplication value is = ${calc}`)
+  },
+  calcSub:function() {
+    var calc = this.width-this.height;
+    console.log(`${this.targetName} , substract value is = ${calc}`)
+  },
+  calAdd : function() {
+    var calc = this.width + this.height;
+    console.log(`${this.targetName} , add value is = ${calc}`)
+  }
+}
+
+var TestFunc = function(width, height, targetName ,color) {
+  StyleFunc.call(this, color)
+  this.width = width || '',
+  this.height = height || '',
+  this.targetName = targetName
+}
+
+TestFunc.prototype = Object.create(CalcFunc.prototype);
+TestFunc.prototype.constructor = TestFunc;
+
+var t1 = new TestFunc(12,10, 't1', 'red');
+t1.calAdd()
+
+console.log(t1)

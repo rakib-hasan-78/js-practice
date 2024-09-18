@@ -919,45 +919,221 @@ Array.prototype.myPoet= function () {
   console.log(`hello world`)
 }
 
+// extending prototype
+function extendProto(parent, children) {
+  children.prototype = Object.create(parent.prototype);
+  children.prototype.constructor = children;
+}
 
-var StyleFunc = function(color) {
+var Style = function(color) {
   this.color = color
 }
 
-var CalcFunc = function () {
+var Cal = function() {}
+Cal.prototype = {
+  add: function() {
+    var cal = this.width + this.height;
+    console.log(`${this.target} add value, is = ${cal}`)
+  },
+  subtract: function() {
+    var cal = this.width - this.height;
+    console.log(`${this.target} subtract value, is = ${cal}`)
+  },
+  multiply: function() {
+    var cal = this.width * this.height;
+    console.log(`${this.target} multiply value, is = ${cal}`)
+  },
 
-}
-CalcFunc.prototype= {
-
-    calcDivide : function() {
-    var calc = this.width / this.height;
-    console.log(`${this.targetName} ,  divide value is = ${calc}`)
-  },
-  calcMulti : function() {
-    var calc = this.width * this.height;
-    console.log(`${this.targetName} , Multiplication value is = ${calc}`)
-  },
-  calcSub:function() {
-    var calc = this.width-this.height;
-    console.log(`${this.targetName} , substract value is = ${calc}`)
-  },
-  calAdd : function() {
-    var calc = this.width + this.height;
-    console.log(`${this.targetName} , add value is = ${calc}`)
+  divide: function() {
+    var cal = this.width / this.height;
+    console.log(`${this.target} divide value, is = ${cal}`)
   }
 }
 
-var TestFunc = function(width, height, targetName ,color) {
-  StyleFunc.call(this, color)
-  this.width = width || '',
-  this.height = height || '',
-  this.targetName = targetName
+var TestFunc = function(width, height, color, target) {
+  this.width = width
+  this.height = height
+  Style.call(this, color)
+  this.target = target
 }
 
-TestFunc.prototype = Object.create(CalcFunc.prototype);
-TestFunc.prototype.constructor = TestFunc;
+extendProto(Cal, TestFunc)
 
-var t1 = new TestFunc(12,10, 't1', 'red');
-t1.calAdd()
+var b1 = new TestFunc(21,12,'orange', 'b1')
+b1.divide()
 
-console.log(t1)
+class StyleColor {
+  static getColor(color) {
+    return color;
+  }
+}
+
+class CalFunc {
+  add() {
+    const cal = this.width + this.height;
+    console.log(`${this.target} add value, is = ${cal}`)
+  }
+  subtract(){
+    const cal = this.width - this.height;
+    console.log(`${this.target} subtract value, is = ${cal}`)
+  }
+  multiply(){
+    const cal = this.width * this.height;
+    console.log(`${this.target} multiply value, is = ${cal}`)
+  }
+  divide(){
+    const cal = this.width / this.height;
+    console.log(`${this.target} divide value, is = ${cal}`)
+  }
+}
+
+class TargetClass extends CalFunc {
+  constructor(width, height, target, color) {
+    super()
+    this.width = width
+    this.height = height 
+    this.target =target
+    this.color = StyleColor.getColor(color)
+  }
+}
+
+const b2 = new TargetClass(21, 12, 'b1', 'blue');
+console.log(b2)
+
+// oop mixins or prototypical compoitions 
+
+var Living = function (name) {
+  this.name = name 
+}
+function canWalk () {
+  console.log(`can walk`)
+}
+function canEat () {
+  console.log(`can Eat....`)
+}
+function canRead() {
+  console.log(`can read....`)
+}
+
+function canSwim() {
+  console.log(`can swim....`)
+}
+function canThink() {
+  console.log(`can think ...`)
+}
+
+function canFly(){
+  console.log(`can fly ....` )
+}
+function canSing() {
+  console.log(`can sing....`)
+}
+
+function objectAssign(target, ...objects) {
+  Object.assign(target, ...objects)
+}
+
+objectAssign(Living.prototype, {
+  canWalk: canWalk,
+  canEat: canEat,
+  canRead: canRead,
+  canThink: canThink,
+
+});
+
+const persn = new Living('Rakib');
+console.log(persn)
+
+
+class LivingThings {
+
+    constructor(name){
+      this.name = name
+    }
+}
+
+const walking = {
+  walk(){
+    console.log(`can walk`)
+  }
+}
+
+const sleeping = {
+  sleep(){
+    console.log(`sleeping`)
+  }
+}
+const moving = {
+  move(){
+    console.log(`moving`)
+  }
+}
+const diving = {
+  canDive(){
+    console.log(`diving `)
+  }
+}
+
+const flying = {
+  fly(){
+    console.log(`flying`)
+  }
+}
+
+const swimming = {
+  canSwim(){
+    console.log(`can swim`)
+  }
+}
+const thinking ={
+  think(){
+    console.log(`can think`)
+  }
+}
+
+const reading = {
+  read(){
+    console.log(`can read`)
+  }
+}
+
+const singing = {
+  canSing(){
+    console.log(`can sing`)
+  }
+}
+
+const canFlying = {
+  canFly(){
+    console.log(`can fly`)
+  }
+}
+
+
+const applyMixin =(target, objects) => {
+  objects.forEach(object => {
+    Object.getOwnPropertyNames(object).forEach(name=>{
+      target.prototype[name] = object[name]
+    })
+  })
+}
+
+class Human extends LivingThings{}
+applyMixin(Human, [walking, sleeping, moving, reading, thinking])
+
+const newPerson = new Human('rakib')
+console.log(newPerson)
+
+
+class Bird extends LivingThings {}
+applyMixin(Bird, [walking, sleeping, moving, diving, flying]);
+const bird = new Bird('Eagle')
+console.log(bird)
+
+class Dog extends LivingThings{}
+applyMixin(Dog, [walking, sleeping, moving])
+
+const newDog = new Dog('Bull Dog');
+console.log(newDog)
+
+

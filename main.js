@@ -1137,3 +1137,67 @@ const newDog = new Dog('Bull Dog');
 console.log(newDog)
 
 
+class Creative extends LivingThings {}
+applyMixin(Creative, [walking, sleeping, moving, reading, thinking, singing]);
+
+const creativeOne = new Creative('Sultana Tonmay')
+console.log(creativeOne);
+
+
+function testFunction(msg=`hello`, name=`musayeeb`) {
+  console.log(`${msg} !, ${name}`)  
+}
+testFunction('good morning', 'pigol')
+
+function defaultMath(n=12) {
+  n = n*n;
+  console.log(n)
+}
+defaultMath(5)
+
+const itArr = [12,2,3,44];
+function arrIterator(constructor){
+  let i = 0
+  return {
+    nextFunc(){
+      return {
+        done: i<= constructor.length,
+        value: constructor[i++] 
+      }
+    }
+  }
+}
+let firstFire = arrIterator(itArr);
+console.log(firstFire.nextFunc())
+console.log(firstFire.nextFunc())
+console.log(firstFire.nextFunc())
+console.log(firstFire.nextFunc())
+console.log(firstFire.nextFunc())
+
+let objj = {
+  start:1,
+  end:5,
+  [Symbol.iterator]: function name() {
+    let star = this.start;
+    let self = this
+    return{
+      next(){
+        return{
+          done: star>self.end,
+          value: star>self.end? undefined : star++
+        }
+      }
+    }
+  }
+}
+// for (const v  of objj) {
+//   console.log(v)
+// }
+
+let iterate = objj[Symbol.iterator]();
+console.log(iterate.next())
+console.log(iterate.next())
+console.log(iterate.next())
+console.log(iterate.next())
+console.log(iterate.next())
+console.log(iterate.next())

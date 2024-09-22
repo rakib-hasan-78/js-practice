@@ -1201,3 +1201,226 @@ console.log(iterate.next())
 console.log(iterate.next())
 console.log(iterate.next())
 console.log(iterate.next())
+
+
+
+const obj21 = {
+  name:`musayeeb`,
+  parents:{
+    father:'rakib',
+    mother:'tonmay'
+  },
+  education:'not started yet',
+  address:{
+    present: 'kallyanpur, dhaka, bangladesh',
+    permanent: 'aruapara, kushtia, bangladesh'
+  },
+  languages:{
+    primary:'bangla',
+    secondary:'english, arabic, latin, spanish'
+  },
+  nationality:'bangladesh'
+}
+
+let {name, nationality, education,
+   languages:{secondary}, parents:{mother}, 
+   address:{permanent}} =obj21;
+
+console.log(name, nationality,
+   education, secondary,
+    mother, permanent)
+
+
+// custom iteraror --->
+
+
+function iterateFuction(constructor) {
+  let i =0;
+  return{
+    next(){
+      return{
+        done: i>=constructor.length,
+        value: i>=constructor.length? undefined : constructor[i++]
+      }
+    }
+  }
+}
+
+const arrSampleOne = [12,21,3,42,122,33,29];
+const checkVal = iterateFuction(arrSampleOne);
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+console.log(checkVal.next())
+
+let objItr = {
+  start:1,
+  end:10,
+  [Symbol.iterator]:function() {
+    let starts = this.start;
+    let self =this
+    return{
+      next(){
+        return{
+          done: starts>self.end,
+          value: starts>self.end? undefined:starts++
+        }
+      }
+    }
+  }
+}
+
+for (const i of objItr) {
+  console.log(i)
+}
+
+const itObj = objItr[Symbol.iterator]();
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+console.log(itObj.next())
+
+
+
+// generator 
+
+
+let obj23 = {
+  start: 12,
+  end: 18,
+  [Symbol.iterator]: function *() {
+    let currValue= this.start;
+    while (currValue<this.end) {
+      yield currValue++
+    }
+  }
+}
+
+let resObj = obj23[Symbol.iterator]();
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+console.log(resObj.next())
+
+
+
+function* genFunc(collections) {
+  let first = collections[i];
+  let last = collections.length-1
+
+  while (first<last) {
+    yield first++
+  }
+}
+
+let arrr = [1,2,3,4,5,6,7,8,9]
+
+let checkArrRes = arrr[Symbol.iterator]();
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+console.log(checkArrRes.next())
+
+
+const set = new Set([1,2,3,11]);
+set.add(7);
+
+let setRes = [...set].map(v=>v+2)
+console.log(setRes)
+
+for (let i of setRes) {
+  console.log(i)  
+}
+
+let setIterate = (setRes.values())
+console.log(setIterate.next())
+console.log(setIterate.next())
+console.log(setIterate.next())
+console.log(setIterate.next())
+console.log(setIterate.next())
+console.log(setIterate.next())
+
+const mapConst = new Map([
+    ['a',1],
+    ['b',2],
+    ['c',3],
+    ['d',4],
+]);
+mapConst.set('e',5);
+
+console.log(mapConst)
+
+let x ={a:10}, y={b:21}
+let dataSet = new WeakSet([x,y])
+let z = {
+  z: 13
+}
+dataSet.add(z)
+console.log(dataSet.has(z)) 
+
+
+// class 
+
+class TestOop {
+  constructor(width,height){
+    this.width= width,
+    this.height = height
+  }
+  name = `pigool`
+  draw(){
+    console.log(this.width + this.height)
+  }
+}
+const pigo = new TestOop(1,2)
+pigo.draw()
+console.log(pigo)
+
+
+class MasterClass{
+  add(){
+    let total = this.width + this.height;
+    console.log(`${this.name} of add value is ${total}`)
+  }
+}
+class ColorClass {
+  static myColor(color){
+    this.color = color
+  }
+}
+
+class Rectangle extends MasterClass{
+  constructor(width, height, name, color){
+    super(ColorClass)
+    this.width= width
+    this.height =height
+    this.name = name
+    this.color = color
+  }
+}
+
+const r1 = new Rectangle(12,11,'r1','blue');
+console.log(r1)
+r1.add()
+
+
+

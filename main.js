@@ -1205,10 +1205,10 @@ console.log(iterate.next())
 
 
 const obj21 = {
-  name:`musayeeb`,
+  name:`Musayeeb`,
   parents:{
     father:'rakib',
-    mother:'tonmay'
+    mother:'Tonmay'
   },
   education:'not started yet',
   address:{
@@ -1216,7 +1216,7 @@ const obj21 = {
     permanent: 'aruapara, kushtia, bangladesh'
   },
   languages:{
-    primary:'bangla',
+    primary:'bengali',
     secondary:'english, arabic, latin, spanish'
   },
   nationality:'bangladesh'
@@ -1327,7 +1327,7 @@ function* genFunc(collections) {
   }
 }
 
-let arrr = [1,2,3,4,5,6,7,8,9]
+let arrr = [1,2,3,4,5,6,7,8,9];
 
 let checkArrRes = arrr[Symbol.iterator]();
 console.log(checkArrRes.next())
@@ -1410,7 +1410,7 @@ class ColorClass {
 
 class Rectangle extends MasterClass{
   constructor(width, height, name, color){
-    super(ColorClass)
+    super()
     this.width= width
     this.height =height
     this.name = name
@@ -1423,4 +1423,40 @@ console.log(r1)
 r1.add()
 
 
+class Person {
+  constructor(name, email, phone){
+    this.name = name
+    this.email = email
+    this.phone = phone
+  }
+  print(){
+    console.log(this.name, this.email)
+  }
+  static jsnSt(str){
+    let person = JSON.parse(str);
+    return new Person(person.name, person.email, person.phone);
+  }
 
+}
+
+let jsn = '{"name":"rakib","email":"ooo@gmail.com","phone":"09887654"}'
+let p9 = Person.jsnSt(jsn);
+console.log(p9);
+
+
+class Product {
+  constructor (shirt, pants, devices){
+    this.shirt = shirt
+    this.pants = pants
+    this.devices = devices
+  }
+
+  static carts (str){
+    let products = JSON.parse(str)
+    return new Product(products.shirt, products.pants, products.devices);
+  }
+}
+
+let j = '{"shirt":"cats-eye","pants":"cats-eye-cargo","devices":"laptops"}'
+let myProducts = Product.carts(j);
+console.log(myProducts)

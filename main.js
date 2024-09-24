@@ -1460,3 +1460,124 @@ class Product {
 let j = '{"shirt":"cats-eye","pants":"cats-eye-cargo","devices":"laptops"}'
 let myProducts = Product.carts(j);
 console.log(myProducts)
+
+
+const _horizental = Symbol();
+const _height = Symbol();
+class PrivateCheck {
+  constructor(horizental, height){
+    this[_horizental] = horizental
+    this[_height] = height
+    this.total = 1 / 2 * (this[_horizental] * this[_height])
+  }
+  calc(){
+    console.log(`the triangular value is ${this.total} sq sm`)
+  }
+}
+
+const tri = new PrivateCheck(11,12)
+console.log(tri)
+tri.calc()
+
+
+
+{
+
+  // abstraction & getter and setter in es 6 
+
+const _width = new WeakMap();
+const _height = new WeakMap();
+const _name = new WeakMap();
+const _area = new WeakMap();
+class PrivateSquare {
+  constructor (width,height, name){
+    _width.set(this, width)
+    _height.set(this, height)
+    _name.set(this, name)
+    _area.set(this, ()=>{
+        const width = _width.get(this);
+        const height = _height.get(this);
+        const name = _name.get(this);
+
+        console.log(`${name} Shape area is  ${2 * (width + height)} CM.`)
+    })
+  }
+  area(){
+    _area.get(this)()
+  }
+  get width(){
+    return _width.get(this)
+  }
+  set width (v){
+    _width.set(this, v)
+  }
+}
+
+const ps = new PrivateSquare(10, 20, 'ps');
+ps.area()
+console.log(ps)
+console.log(ps.width)
+ps.width = 30
+console.log(ps.width)
+ps.area()
+
+}
+
+
+// object color ---->
+class MyColor {
+  static defaultColor (color) {
+    this.color = color
+  } 
+}
+
+const _door = new WeakMap()
+const _window = new WeakMap()
+const _glass = new WeakMap()
+const _surrounding = new WeakMap()
+const _elements = new WeakMap()
+const _envr = new WeakMap()
+
+class House extends MyColor{
+  constructor(door, window, glass,surrounding, color) {
+    super(color)
+    _door.set(this, door)
+    _window.set(this, window)
+    _glass.set(this, glass)
+    _surrounding.set(this, surrounding)
+    MyColor.defaultColor(color);
+
+    _elements.set(this, ()=>{
+      const door = _door.get(this)
+      const window = _window.get(this)
+      const glass = _glass.get(this)
+
+      console.log(`1. This Door Is Made of ${door} 
+2. This Window Is Exported From ${window}
+3. This Glass is from ${glass}`)
+    })
+
+    _envr.set(this, ()=>{
+      const surrounding = _surrounding.get(this);
+      console.log(`Here environment is ${surrounding} Than the other parts`)
+    })
+
+  }
+
+  design() {
+    console.log(`This House Color is ${MyColor.color}`)
+    _elements.get(this)();
+    _envr.get(this)();
+  }
+
+  envClr(){
+    console.log(`This House Color is ${MyColor.color}`)
+    _envr.get(this)()
+  }
+
+}
+
+const h1 = new House('Australian Wood', 'Indonesia', 'Syria', 'Misty', 'Sky-Blue')
+console.log(h1)
+h1.envClr()
+h1.design()

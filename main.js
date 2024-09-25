@@ -1045,6 +1045,7 @@ const persn = new Living('Rakib');
 console.log(persn)
 
 
+
 class LivingThings {
 
     constructor(name){
@@ -1123,6 +1124,7 @@ applyMixin(Human, [walking, sleeping, moving, reading, thinking])
 
 const newPerson = new Human('rakib')
 console.log(newPerson)
+
 
 
 class Bird extends LivingThings {}
@@ -1581,3 +1583,147 @@ const h1 = new House('Australian Wood', 'Indonesia', 'Syria', 'Misty', 'Sky-Blue
 console.log(h1)
 h1.envClr()
 h1.design()
+
+
+// const myNumber = 50;
+// const targetedNumber = 40
+// if (myNumber>targetedNumber) {
+//   throw new RangeError(`error occured !!!`)
+// }
+
+// const maxVal = 1.7976931348623157e+308;
+// const customVal = 3.7976931348623157e+308;
+// if (customVal>maxVal) {
+//   throw new RangeError('invalid number given')
+// }
+
+// const customErr = `12`
+// const regularEx = 12
+
+// if (regularEx!==customErr) {
+//   throw new TypeError('data type is not same !!!')
+// }
+
+
+//   function customTry(text) {
+//     try {
+//       let str = text.trim();
+//       let customLine = str.split(' ');
+//       return customLine
+//     } catch (error) {
+//       console.log(error.message)
+//     }
+//   }
+
+// let myData = customTry(89)
+// console.log(myData)
+
+
+class CustomError extends Error {
+  constructor (message){
+    super(message)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, CustomError)
+    }
+  }
+}
+
+function customTry(text) {
+  try {
+    if (!(typeof text=== 'string')) {
+      throw new CustomError('Error Matters')
+    }
+    let x = text.trim();
+    let y = x.split(' ')
+    return y
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+
+const beema = customTry(`78`)
+console.log(beema)
+
+
+// common between essences 
+class CommonChar{
+  static CommonChar(existance) {
+    this.existance = existance
+  }
+}
+// ensuring from universe
+class Essence extends CommonChar {
+  constructor (existance, name){
+    super(existance)
+    this.name = name
+  }
+}
+// essences who have life
+class LivingEssence extends Essence {
+  constructor(existance ,name, life) {
+    super(existance, name)
+    this.life = life
+  }
+}
+
+// essences without life 
+
+class Matters extends Essence{
+  constructor(existance,name, matter) {
+    super(existance, name)
+    this.matter = matter
+  }
+}
+
+// Behavioral functions
+function eating() {
+  console.log('Can Eat');
+}
+
+function hasWeight() {
+  console.log('Has Weight...');
+}
+
+function canSwimming() {
+  console.log('Can Swim');
+}
+
+function hasBrain() {
+  console.log('Has Brain');
+}
+
+function canRun() {
+  console.log('Can Run');
+}
+
+function haveBaby() {
+  console.log('Have Babies');
+}
+
+function canReading() {
+  console.log('Can Read');
+}
+
+
+const composingFunction = (target, objects) => {
+  objects.forEach(func => {
+    target.prototype[func.name] = func; 
+  });
+}
+
+//  forHuman 
+
+class Man extends LivingEssence{}
+composingFunction(Man, [eating, hasWeight, canSwimming,  hasBrain, canRun, haveBaby, canReading])
+
+
+const raqib = new Man('True', 'Raqib', 'True');
+raqib.canRun= function() {
+  console.log(`super fast runner`)
+}
+console.log(raqib)
+raqib.canRun()
+
+const sakib = new Man('true', 'sakib', 'true')
+console.log(sakib)
+sakib.canRun()

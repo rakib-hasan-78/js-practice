@@ -1321,15 +1321,28 @@ console.log(resObj.next())
 
 
 function* genFunc(collections) {
-  let first = collections[i];
+  let i = 0;
+  
   let last = collections.length-1
 
-  while (first<last) {
-    yield first++
+  while (i<=last) {
+    yield collections[i++]
   }
 }
 
 let arrr = [1,2,3,4,5,6,7,8,9];
+let gen = genFunc(arrr);
+
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
+console.log(gen.next())
 
 let checkArrRes = arrr[Symbol.iterator]();
 console.log(checkArrRes.next())
@@ -1727,3 +1740,49 @@ raqib.canRun()
 const sakib = new Man('true', 'sakib', 'true')
 console.log(sakib)
 sakib.canRun()
+
+
+class PractiseError extends Error {
+  constructor(message) {
+    super(message)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, PractiseError)
+    }
+  }
+}
+
+const numberPurifier = (value) => {
+  try {
+    // if the value is an integer
+    if (!Number.isInteger(value)) {
+      throw new PractiseError(`value can not be a floating number`)
+    }
+    // if the value is a string
+    if (typeof value === 'string') {
+      throw new PractiseError('ERROR !!! Type Error ! Must be A Number')
+    }
+    // if the value is less than 2
+    if (value<2) {
+      throw new PractiseError('Error!!!! given value is less than 2')
+    }
+    // if the value is less than 0 
+    if (value<0) {
+      throw new PractiseError('Error!!!! Value is less than 0')
+    }
+    // if the value is larger than 10 
+
+    if (value>10) {
+      throw new PractiseError('Error!!!! value can not be greater than 10')
+    }
+    // valid value  
+    let val = value;
+    console.log(`yahoo it is our expected value ${val}`)
+  } catch (e) {
+    console.log(e.message)
+  }
+}
+numberPurifier(9.00)
+
+
+
+

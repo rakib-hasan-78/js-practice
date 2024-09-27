@@ -1,3 +1,4 @@
+import { boltu } from './js/async';
 import { booleans } from './js/booleans';
 import { ConsFac, PrivateConstructor } from './js/constructOop';
 import { numbers } from './js/number';
@@ -1782,6 +1783,8 @@ const numberPurifier = (value) => {
   }
 }
 numberPurifier(9.00)
+
+boltu()
 
 
 

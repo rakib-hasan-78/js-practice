@@ -1787,5 +1787,81 @@ numberPurifier(9.00)
 boltu()
 
 
+class CustomErrorNumber extends Error{
+  constructor(message) {
+    super(message)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, CustomErrorNumber)
+    }
+  }
+}
+
+const numberFormat = (number)=>{
+
+  const thousand =      1000;
+  const mill =       1000000;
+  const bill=     1000000000;
+  const tril = 1000000000000;
+  let givenNumber = Number.parseFloat(number)
+  let result;
+  try {
+    // invalid number
+    if (isNaN(givenNumber)) {
+      throw new CustomErrorNumber(`Non Numeric value not a valid number`)
+    }
+    // if value is Infinity
+    if (!Number.isFinite(givenNumber)) {
+      throw new CustomErrorNumber(`Infinity is not a valid number`)
+    }
+    // value is less than zero
+    if (givenNumber<=0) {
+      throw new CustomErrorNumber(`${givenNumber} can not be a valid number`)
+    }
+    // thousand format
+
+    // trillion format
+    if (givenNumber >= tril) {
+      result = '';
+      result = givenNumber % tril ===0 ? `${givenNumber / tril} T` : `${(givenNumber / tril).toFixed(2)} T`
+    }
+    // billion format
+    else if (givenNumber >= bill) {
+      result = '';
+      result = givenNumber % bill ===0 ? `${givenNumber / bill} B` : `${(givenNumber / bill).toFixed(2)} B`
+    }
+    // million format
+    else if (givenNumber >= mill) {
+      result = '';
+      result = givenNumber % mill ===0 ? `${givenNumber / mill} M` : `${(givenNumber / mill).toFixed(2)} M`
+    }
+
+    else if (givenNumber>=thousand) {
+      result = givenNumber % thousand === 0 ? `${givenNumber/thousand} K` : `${(givenNumber/thousand).toFixed(2)}K`;
+    }
+    else{
+      result = `${givenNumber.toString()} is not the formattable one`;
+    }
+    return  result ;
+
+  } catch (error) {
+    return error.message ;
+  }
+}
+
+console.log(numberFormat(`hbhbxs`))
+console.log(numberFormat(2.7976931348623157e+308))
+console.log(numberFormat(-654))
+console.log(numberFormat(9874))
+console.log(numberFormat(98424))
+console.log(numberFormat(989463))
+console.log(numberFormat(9894633))
+console.log(numberFormat(98946330))
+console.log(numberFormat(989463309))
+console.log(numberFormat(9894633093))
+console.log(numberFormat(98946330935))
+console.log(numberFormat(989463309359))
+console.log(numberFormat(9894633093592))
+console.log(numberFormat(98946330935927))  
+
 
 

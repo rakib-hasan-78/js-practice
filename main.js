@@ -1900,3 +1900,84 @@ asyncFunc(arr, v=>{
  })
  promise.then((v)=>console.log(v))
  
+let customPromise = new Promise((resolve, reject)=>{
+  setTimeout( resolve, 5000, `second promise`)
+})
+customPromise.then(v=>console.log(v))
+
+
+
+// ajax request with promise 
+
+const Base_url = `https://fakestoreapiserver.reactbd.com/users/`
+
+const promiseAjaxRequest = (url) =>{
+  return new Promise((resolve, reject)=>{
+    const xhr = new XMLHttpRequest();
+    xhr.open('get',url);
+    xhr.onreadystatechange =function() {
+      if (xhr.readyState===4) {
+        if (xhr.status===200) {
+          try {
+            const response = JSON.parse(xhr.response)
+            resolve(response)
+          } catch (error) {
+            reject(new Error('error'))
+          }
+        } else {
+          reject(new Error('error!!!!!'))
+        }
+      }
+    }
+    xhr.send()
+  })
+}
+promiseAjaxRequest(`${Base_url}`)
+  .then(v=>{
+    const names = v.map(n=>n.name)
+    console.log(names)
+  })
+  .catch(error => {
+    console.error('Error:', error.message)
+  })
+
+
+// ajaxRequestWithFetch
+
+const fetchFunction = (url) => {
+  return fetch(url)
+    .then(response=>{
+      if (!response.ok) {
+        throw new Error(`url did not found`)
+      }
+      return response.json()
+    })
+    .catch(error=>{
+      throw new Error('fetch Error :' , error.message)
+    })
+}
+
+fetchFunction(`${Base_url}`)
+  .then(value=>{
+    const email = value.map(v=>v.email)
+    console.log(email)
+  })
+  .catch(reject=>{
+    console.error(`error`, reject.message)
+  })
+
+
+
+const asyncFunction = async (url)=>{
+  const srverData = await fetch(url)
+  const data = await srverData.json()
+  return data
+}
+
+asyncFunction(`${Base_url}`)
+.then((v)=>{
+  const city = v.map(({address:{city}})=>city)
+  console.log(city)
+})
+
+

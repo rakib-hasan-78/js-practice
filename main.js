@@ -1863,5 +1863,40 @@ console.log(numberFormat(989463309359))
 console.log(numberFormat(9894633093592))
 console.log(numberFormat(98946330935927))  
 
+// ajax request with callback
 
+function xmlRequestFunction(method,url, cb) {
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open(method, url)
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState===4) {
+      if (xhr.status===200) {
+          const data = JSON.parse(xhr.response)
+          cb(data)
+      }
+    }
+  }
+  xhr.send()
+}
+xmlRequestFunction('get', 'https://fakestoreapi.com/users', (data)=>{
+  data.map(value=>console.log(`user name : ${value.username}, email: ${value.email}, phone: ${value.phone}`))
+})
 
+let arr = [12,21,13,31]
+function asyncFunc (arg, cb){
+  return arg.map(v=>{
+    setTimeout(()=>cb(v),0)
+  })
+}
+
+asyncFunc(arr, v=>{
+  console.log(v)
+})
+
+// promise 
+ let promise = new Promise((resolve, reject)=>{
+  setTimeout(resolve, 3000, 'off promise')
+ })
+ promise.then((v)=>console.log(v))
+ 

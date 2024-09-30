@@ -1980,4 +1980,57 @@ asyncFunction(`${Base_url}`)
   console.log(city)
 })
 
+let asyncIterate = {
+  [Symbol.asyncIterator]() {
+    let i =  0;
+    return{
+      next() {
+        if (i<=5) {
+          return Promise.resolve({
+            value: i++,
+            done:false
+          })
+        } else {
+          return Promise.resolve({
+            value: undefined,
+            done:true
+          })
+        }
+      }
+    }
+  }
+}
+
+let items = asyncIterate[Symbol.asyncIterator]();
+
+async function asyncHandler() {
+
+  console.log(await items.next())
+  console.log(await items.next())
+  console.log(await items.next())
+  console.log(await items.next())
+  console.log(await items.next())
+  console.log(await items.next())
+}
+asyncHandler()
+;(async function () {
+   for await (let i of asyncIterate ) {
+    console.log(i)
+  } 
+} )()
+
+
+async function* asyncGen() {
+  let i = 0;
+  while (true) {
+    if(i>5) return
+    yield Promise.resolve(i++)
+  }
+}
+
+;(async function() {
+  for await (const i of asyncGen()) {
+    console.log(i)
+  }
+})()
 
